@@ -14,6 +14,18 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int OPERATOR_CONTROLLER_PORT = 1;
+    public static final double DEAD_BAND = 0.05;
+  }
+
+  public static class CanbusId {
+    public static final int FRONT_LEFT_DRIVE = 2, FRONT_LEFT_TURNING = 3;
+    public static final int FRONT_RIGHT_DRIVE = 4, FRONT_RIGHT_TURNING = 5;
+    public static final int REAR_LEFT_DRIVE = 6, REAR_LEFT_TURNING = 7;
+    public static final int REAR_RIGHT_DRIVE = 8, REAR_RIGHT_TURNING = 9;
+
+    public static final int TOP_ROLLER = 10;
+    public static final int BOTTOM_ROLLER = 11;
   }
 }
