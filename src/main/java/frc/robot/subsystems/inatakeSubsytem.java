@@ -12,25 +12,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class inatakeSubsytem extends SubsystemBase {
 
-  private CANSparkFlex topRollerMoto;
-  private CANSparkFlex bottomRollerMoto;
+  private CANSparkFlex topRoller;
+  private CANSparkFlex bottomRoller;
 
   private DigitalInput intakeLimitSwitch;
-
-  private double wheelIntakeMaxSpeed = 1;
   private double rollerIntakeMaxSpeed = 1;
 
   public inatakeSubsytem() {
-    topRollerMoto = new CANSparkFlex(10, MotorType.kBrushless);
-    topRollerMoto.setInverted(false);
-    topRollerMoto.setIdleMode(IdleMode.kCoast);
-    topRollerMoto.burnFlash();
+    topRoller = new CANSparkFlex(10, MotorType.kBrushless);
+    topRoller.setInverted(false);
+    topRoller.setIdleMode(IdleMode.kCoast);
+    topRoller.burnFlash();
 
-    bottomRollerMoto = new CANSparkFlex(11, MotorType.kBrushless);
-    bottomRollerMoto.follow(topRollerMoto);
-    bottomRollerMoto.setInverted(true);
-    bottomRollerMoto.setIdleMode(IdleMode.kCoast);
-    bottomRollerMoto.burnFlash();
+    bottomRoller = new CANSparkFlex(11, MotorType.kBrushless);
+    bottomRoller.setInverted(true);
+    bottomRoller.setIdleMode(IdleMode.kCoast);
+    bottomRoller.burnFlash();
 
     intakeLimitSwitch = new DigitalInput(4);
 
@@ -39,8 +36,8 @@ public class inatakeSubsytem extends SubsystemBase {
   // copied this from the last code
   private void setMotorSpeed(double motorSpeedPercentage) {
     double motorSpeed = motorSpeedPercentage / 100;
-    topRollerMoto.set(motorSpeed);
-    bottomRollerMoto.set(motorSpeed);
+    topRoller.set(motorSpeed);
+    bottomRoller.set(motorSpeed);
   }
 
   @Override
@@ -48,17 +45,17 @@ public class inatakeSubsytem extends SubsystemBase {
   }
 
   public void stopIntake() {
-    topRollerMoto.set(0);
-    bottomRollerMoto.set(0);
+    topRoller.set(0);
+    bottomRoller.set(0);
 
   }
 
-  public void RunIntakeIn() {
-    setMotorSpeed(25);
+  public void RunIrollerIntakeMaxSpeedntakeIn() {
+    setMotorSpeed(rollerIntakeMaxSpeed);
   }
 
-  public void RunIntakeOut() {
-    setMotorSpeed(-25);
+  public void RunIrollerIntakeMaxSpeedntakeOut() {
+    setMotorSpeed(-rollerIntakeMaxSpeed);
   }
 
   public boolean isNoteIntakeComplete() {
