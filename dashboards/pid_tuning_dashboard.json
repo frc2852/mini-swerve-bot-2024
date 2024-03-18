@@ -1,0 +1,1233 @@
+{
+  "tabPane": [
+    {
+      "title": "ClimbWheelSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/ClimbWheelSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemP",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemI",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemD",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemIz",
+              "_title": "Iz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemFF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemUpdatePID",
+              "_title": "UpdatePID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemVelocitySetPoint",
+              "_title": "VelocitySetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemVelocitySetPoint",
+              "_source1": "network_table:///SmartDashboard/ClimbWheelSubsystemVelocity",
+              "_title": "Climb Wheel Velocity",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 5500.0,
+              "Y-axis/Lower bound": -5500.0,
+              "Y-axis/Unit": "RPM",
+              "Visible data/SmartDashboard/ClimbWheelSubsystemVelocity": true,
+              "Visible data/SmartDashboard/ClimbWheelSubsystemVelocitySetPoint": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ClimbWheelSubsystemVelocityError",
+              "_title": "VelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "ConveyorSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/ConveyorSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopMotorP",
+              "_title": "TopMotorP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopMotorI",
+              "_title": "TopMotorI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopMotorD",
+              "_title": "TopMotorD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopMotorIz",
+              "_title": "TopMotorIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopMotorFF",
+              "_title": "TopMotorFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomMotorP",
+              "_title": "BottomMotorP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomMotorI",
+              "_title": "BottomMotorI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomMotorD",
+              "_title": "BottomMotorD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomMotorIz",
+              "_title": "BottomMotorIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomMotorFF",
+              "_title": "BottomMotorFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemUpdateTopMotorPID",
+              "_title": "UpdateTopMotorPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemUpdateBottomMotorPID",
+              "_title": "UpdateBottomMotorPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemVelocitySetPoint",
+              "_title": "VelocitySetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemVelocitySetPoint",
+              "_source1": "network_table:///SmartDashboard/ConveyorSubsystemTopVelocity",
+              "_source2": "network_table:///SmartDashboard/ConveyorSubsystemBottomVelocity",
+              "_title": "Conveyor Velocity",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 5500.0,
+              "Y-axis/Lower bound": -5500.0,
+              "Y-axis/Unit": "RPM",
+              "Visible data/SmartDashboard/ConveyorSubsystemBottomVelocity": true,
+              "Visible data/SmartDashboard/ConveyorSubsystemTopVelocity": true,
+              "Visible data/SmartDashboard/ConveyorSubsystemVelocitySetPoint": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemTopVelocityError",
+              "_title": "TopVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ConveyorSubsystemBottomVelocityError",
+              "_title": "BottomVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "ElevatorSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/ElevatorSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemP",
+              "_title": "P",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemI",
+              "_title": "I",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemD",
+              "_title": "D",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemIz",
+              "_title": "Iz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemFF",
+              "_title": "FF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemUpdatePID",
+              "_title": "UpdatePID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemPositionSetPoint",
+              "_title": "PositionSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemPositionSetPoint",
+              "_source1": "network_table:///SmartDashboard/ElevatorSubsystemPosition",
+              "_title": "Elevator Position",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 5500.0,
+              "Y-axis/Lower bound": -5500.0,
+              "Y-axis/Unit": "t",
+              "Visible data/SmartDashboard/ElevatorSubsystemPosition": true,
+              "Visible data/SmartDashboard/ElevatorSubsystemPositionSetPoint": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ElevatorSubsystemPositionError",
+              "_title": "PositionError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "IntakeSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/IntakeSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersP",
+              "_title": "TopRollersP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersI",
+              "_title": "TopRollersI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersD",
+              "_title": "TopRollersD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersIz",
+              "_title": "TopRollersIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersFF",
+              "_title": "TopRollersFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersP",
+              "_title": "BottomRollersP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersI",
+              "_title": "BottomRollersI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersD",
+              "_title": "BottomRollersD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersIz",
+              "_title": "BottomRollersIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersFF",
+              "_title": "BottomRollersFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemUpdateTopRollersPID",
+              "_title": "UpdateTopRollersPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemUpdateBottomRollersPID",
+              "_title": "UpdateBottomRollersPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "18,8": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemIsRunning",
+              "_title": "IsRunning",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemVelocitySetPoint",
+              "_title": "VelocitySetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemVelocitySetPoint",
+              "_source1": "network_table:///SmartDashboard/IntakeSubsystemTopRollersVelocity",
+              "_source2": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersVelocity",
+              "_title": "Intake Velocity",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 5500.0,
+              "Y-axis/Lower bound": -5500.0,
+              "Y-axis/Unit": "RPM",
+              "Visible data/SmartDashboard/IntakeSubsystemBottomRollersVelocity": true,
+              "Visible data/SmartDashboard/IntakeSubsystemTopRollersVelocity": true,
+              "Visible data/SmartDashboard/IntakeSubsystemVelocitySetPoint": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemTopRollersVelocityError",
+              "_title": "TopRollersVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/IntakeSubsystemBottomRollersVelocityError",
+              "_title": "BottomRollersVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "ShooterSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/ShooterSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerP",
+              "_title": "TopRollerP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerI",
+              "_title": "TopRollerI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerD",
+              "_title": "TopRollerD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerIz",
+              "_title": "TopRollerIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerFF",
+              "_title": "TopRollerFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerP",
+              "_title": "BottomRollerP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerI",
+              "_title": "BottomRollerI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerD",
+              "_title": "BottomRollerD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerIz",
+              "_title": "BottomRollerIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerFF",
+              "_title": "BottomRollerFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemUpdateTopRollerPID",
+              "_title": "UpdateTopRollerPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemUpdateBottomRollerPID",
+              "_title": "UpdateBottomRollerPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemVelocitySetPoint",
+              "_title": "VelocitySetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerVelocity",
+              "_source1": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerVelocity",
+              "_title": "Shooter Velocity",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 5500.0,
+              "Y-axis/Lower bound": -5500.0,
+              "Y-axis/Unit": "RPM",
+              "Visible data/SmartDashboard/ShooterSubsystemBottomRollerVelocity": true,
+              "Visible data/SmartDashboard/ShooterSubsystemTopRollerVelocity": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemTopRollerVelocityError",
+              "_title": "TopRollerVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/ShooterSubsystemBottomRollerVelocityError",
+              "_title": "BottomRollerVelocityError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "WinchSubsystem",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/WinchSubsystem",
+      "widgetPane": {
+        "gridSize": 118.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorP",
+              "_title": "LeftMotorP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorI",
+              "_title": "LeftMotorI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorD",
+              "_title": "LeftMotorD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorIz",
+              "_title": "LeftMotorIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorFF",
+              "_title": "LeftMotorFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorP",
+              "_title": "RightMotorP",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorI",
+              "_title": "RightMotorI",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorD",
+              "_title": "RightMotorD",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorIz",
+              "_title": "RightMotorIz",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorFF",
+              "_title": "RightMotorFF",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemUpdateLeftMotorPID",
+              "_title": "UpdateLeftMotorPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Toggle Button",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemUpdateRightMotorPID",
+              "_title": "UpdateRightMotorPID",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "11,8": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemPositionSetPoint",
+              "_title": "PositionSetPoint",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,0": {
+            "size": [
+              15,
+              8
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorPosition",
+              "_source1": "network_table:///SmartDashboard/WinchSubsystemRightMotorPosition",
+              "_title": "Winch Position",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/WinchSubsystemLeftMotorPosition": true,
+              "Visible data/SmartDashboard/WinchSubsystemRightMotorPosition": true
+            }
+          },
+          "2,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemLeftMotorPositionError",
+              "_title": "LeftMotorPositionError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,6": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/WinchSubsystemRightMotorPositionError",
+              "_title": "RightMotorPositionError",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -8.0,
+    "y": 22.0,
+    "width": 2576.0,
+    "height": 1426.0
+  }
+}

@@ -106,6 +106,7 @@ Temporary Items
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
+!.vscode/settings.prefs
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -176,3 +177,7 @@ logs/
 
 # Folder that has CTRE Phoenix Sim device config storage
 ctre_sim/
+networktables.json.bck
+networktables.json
+simgui-ds.json
+simgui.json

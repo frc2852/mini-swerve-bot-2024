@@ -1,10 +1,8 @@
 package frc.robot.util;
 
 import com.revrobotics.CANSparkBase;
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkFlex;
 import com.revrobotics.REVLibError;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxAlternateEncoder;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
@@ -12,9 +10,11 @@ import frc.robot.util.constants.LogConstants;
 
 import java.util.function.Supplier;
 
-public class SparkMax extends CANSparkMax {
+//TODO: This needs to be merged with SparkMax class, they are are fully identical except for the alt encoder which we can write a check for.
+public class SparkFlex extends CANSparkFlex {
 
   public enum MotorModel {
+    VORTEX,
     NEO,
     NEO_550,
     BRUSHED
@@ -29,8 +29,8 @@ public class SparkMax extends CANSparkMax {
   private boolean initialized = false;
   private boolean deviceConnectionStatus = false;
 
-  public SparkMax(int canBusId, MotorModel motorType) {
-    super(canBusId, (motorType == MotorModel.NEO || motorType == MotorModel.NEO_550) ? MotorType.kBrushless : MotorType.kBrushed);
+  public SparkFlex(int canBusId) {
+    super(canBusId, MotorType.kBrushless);
 
     // Check if the device is connected
     if (isDeviceConnected()) {
@@ -40,12 +40,6 @@ public class SparkMax extends CANSparkMax {
 
       // Enable voltage compensation to 12V
       enableVoltageCompensation(12.0);
-
-      // For NEO_550 motors, enable Smart Current Limit to 20 amps
-      // This can be overridden by the caller if needed
-      if (motorType == MotorModel.NEO_550) {
-        setSmartCurrentLimit(20);
-      }
     } else {
       String errorMessage = String.format("CANSparkFlex (%s): Device not connected, skipping", canBusId);
       DataTracker.putString(LogConstants.ROBOT_SYSTEM, "SparkFlex", errorMessage, false);
@@ -169,15 +163,6 @@ public class SparkMax extends CANSparkMax {
 
   // #endregion CANSparkBase overrides
 
-  // #region CANSparkMax overrides
-
-  @Override
-  public RelativeEncoder getAlternateEncoder(SparkMaxAlternateEncoder.Type encoderType, int countsPerRev) {
-    return applyCommandWithRetryAndNullCheck(() -> super.getAlternateEncoder(encoderType, countsPerRev), "getAlternateEncoder");
-  }
-
-  // #endregion CANSparkMax overrides
-
   /**
    * Executes a command with retry logic using exponential backoff. This is effective for transient errors.
    *
@@ -219,51 +204,6 @@ public class SparkMax extends CANSparkMax {
     String error = String.format("CANSparkMax (%s): %s failed after %s attempts", this.getDeviceId(), methodName, MAX_RETRIES);
     DriverStation.reportError(error, false);
     return status;
-  }
-
-  /**
-   * Executes a command with retry logic using exponential backoff, checking for null return values.
-   * This is effective for handling transient errors that result in null responses.
-   *
-   * @param command    A {@link Supplier} of T, representing the command to execute.
-   * @param methodName Name of the method for logging.
-   * @param <T>        The type of the object returned by the command.
-   * @return T The result of the command. Returns the object on early success or null after max retries.
-   * 
-   *         The retry logic starts with an initial delay (INITIAL_RETRY_DELAY) and increases the delay after each failed (null) attempt
-   *         by a factor of BACKOFF_MULTIPLIER, capped at MAX_RETRY_DELAY. A warning is logged on each failed attempt. If all attempts fail,
-   *         an error is logged.
-   */
-  private <T> T applyCommandWithRetryAndNullCheck(Supplier<T> command, String methodName) {
-    // Check if the device is connected before proceeding
-    if (!isDeviceConnected()) {
-      String errorMessage = String.format("CANSparkMax (%s): Device not connected, skipping %s", this.getDeviceId(), methodName);
-      DataTracker.putString(LogConstants.ROBOT_SYSTEM, "SparkMax", errorMessage, false);
-      DriverStation.reportError(errorMessage, false);
-      return null;
-    }
-
-    T result = null;
-    double currentDelay = INITIAL_RETRY_DELAY;
-
-    for (int i = 0; i < MAX_RETRIES; i++) {
-      result = command.get();
-      if (result != null) {
-        return result;
-      }
-
-      // Apply backoff strategy
-      Timer.delay(currentDelay);
-      currentDelay = Math.min(currentDelay * BACKOFF_MULTIPLIER, MAX_RETRY_DELAY);
-
-      // Log retry attempt
-      String retryLog = String.format("CANSparkMax (%s): %s attempt %d returned null, retrying in %.2f seconds", this.getDeviceId(), methodName, i + 1, currentDelay);
-      DriverStation.reportError(retryLog, false);
-    }
-
-    String error = String.format("CANSparkMax (%s): %s returned null after %d attempts", this.getDeviceId(), methodName, MAX_RETRIES);
-    DriverStation.reportError(error, false);
-    return result;
   }
 
   /**
