@@ -118,9 +118,11 @@ public class RobotContainer {
    * devices to commands.
    */
   private void configureDriverBindings() {
-
-    // Auto game piece tracking
-    driverController.a().onTrue(new RunCommand(() -> drive.alignAndPickUpNote(), drive));
+    // Climb
+    driverController.povRight().onTrue(new RunCommand(() -> elevator.climbUpPosition(), elevator));
+    driverController.povLeft().onTrue(new RunCommand(() -> elevator.climbDownPosition(), elevator));
+    driverController.povUp().onTrue(new InstantCommand(() -> elevator.manualElevatorUp(), elevator));
+    driverController.povDown().onTrue(new InstantCommand(() -> elevator.manualElevatorDown(), elevator));
 
     drive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -130,9 +132,6 @@ public class RobotContainer {
                 SwerveUtils.applyExponentialResponse(MathUtil.applyDeadband(driverController.getLeftY(), OperatorConstant.DEAD_BAND)),
                 SwerveUtils.applyExponentialResponse(MathUtil.applyDeadband(driverController.getLeftX(), OperatorConstant.DEAD_BAND)),
                 -SwerveUtils.applyExponentialResponse(MathUtil.applyDeadband(driverController.getRightX(), OperatorConstant.DEAD_BAND)),
-                // MathUtil.applyDeadband(driverController.getLeftY(), OperatorConstant.DEAD_BAND),
-                // MathUtil.applyDeadband(driverController.getLeftX(), OperatorConstant.DEAD_BAND),
-                // -MathUtil.applyDeadband(driverController.getRightX(), OperatorConstant.DEAD_BAND),
                 true, true),
             drive));
   }

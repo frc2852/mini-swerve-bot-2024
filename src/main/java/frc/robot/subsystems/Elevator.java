@@ -98,8 +98,22 @@ public class Elevator extends SubsystemBase {
     setElevatorPosition(MotorSetpoint.ELEVATOR_AMP_POSITION);
   }
 
-  public void trapPosition() {
-    setElevatorPosition(MotorSetpoint.ELEVATOR_TRAP_POSITION);
+  public void manualElevatorUp() {
+    positionSetpoint += 1; // Increment the position setpoint by 1 step
+    setElevatorPosition(positionSetpoint);
+}
+
+  public void manualElevatorDown() {
+    positionSetpoint -= 1; // Decrement the position setpoint by 1 step
+    setElevatorPosition(positionSetpoint);
+  }
+
+  public void climbUpPosition() {
+    setElevatorPosition(MotorSetpoint.ELEVATOR_CLIMB_UP_POSITION);
+  }
+
+  public void climbDownPosition() {
+    setElevatorPosition(MotorSetpoint.ELEVATOR_CLIMB_DOWN_POSITION);
   }
 
   public boolean isElevatorAtPosition() {
