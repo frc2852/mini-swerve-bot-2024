@@ -13,16 +13,17 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.Constants.CanbusId;
-import frc.robot.Constants.DIOId;
-import frc.robot.Constants.MotorSetpoint;
+import frc.robot.constants.Constants;
+import frc.robot.constants.Constants.CanbusId;
+import frc.robot.constants.Constants.DIOId;
+import frc.robot.constants.Constants.MotorSetpoint;
 import frc.robot.util.DataTracker;
 import frc.robot.util.PIDParameters;
 import frc.robot.util.SparkFlex;
 
-public class ConveyorSubsystem extends SubsystemBase {
+public class Conveyor extends SubsystemBase {
 
+  // Controllers
   private final SparkFlex topConveyor;
   private final SparkPIDController topConveyorPID;
   private final RelativeEncoder topConveyorEncoder;
@@ -33,26 +34,28 @@ public class ConveyorSubsystem extends SubsystemBase {
   private final RelativeEncoder bottomConveyorEncoder;
   private PIDParameters bottomConveyorPidParameters;
 
+  // Sensors
+  private final DigitalInput ampBeamBreak;
+
+  // State
   private double velocitySetpoint;
 
+  // Smartdashboard
   private boolean updateTopConveyorPID = false;
   private boolean updateBottomConveyorPID = false;
 
-  private final DigitalInput ampGamePieceReady;
-
-  public ConveyorSubsystem() {
+  public Conveyor() {
     // Initialize motor controllers
     topConveyor = new SparkFlex(CanbusId.CONVEYOR_TOP);
     topConveyor.setIdleMode(IdleMode.kCoast);
-    //changed from false to true
     topConveyor.setInverted(false);
 
     bottomConveyor = new SparkFlex(CanbusId.CONVEYOR_BOTTOM);
     bottomConveyor.setIdleMode(IdleMode.kCoast);
     bottomConveyor.setInverted(true);
 
-    // Initialize proximity sensors
-    ampGamePieceReady = new DigitalInput(DIOId.CONVEYOR_PROXIMITY_SENSOR);
+    // Initialize sensors
+    ampBeamBreak = new DigitalInput(DIOId.CONVEYOR_BEAM_BREAK);
 
     // Initialize PID controllers
     topConveyorPID = topConveyor.getPIDController();
@@ -81,42 +84,44 @@ public class ConveyorSubsystem extends SubsystemBase {
     bottomConveyor.burnFlash();
 
     // Add update buttons to dashboard
-    DataTracker.putBoolean(getName(), "UpdateTopMotorPID", updateTopConveyorPID, true);
-    DataTracker.putBoolean(getName(), "UpdateBottomMotorPID", updateBottomConveyorPID, true);
+    if (!DriverStation.isFMSAttached() && Constants.PID_TUNE_MODE) {
+      DataTracker.putBoolean(getName(), "UpdateTopMotorPID", updateTopConveyorPID, true);
+      DataTracker.putBoolean(getName(), "UpdateBottomMotorPID", updateBottomConveyorPID, true);
+    }
   }
 
   @Override
   public void periodic() {
-    // Get current velocities of the conveyors
-    double topConveyorVelocity = topConveyorEncoder.getVelocity();
-    double bottomConveyorVelocity = bottomConveyorEncoder.getVelocity();
+    if (!DriverStation.isFMSAttached()) {
+      // Get current velocities of the conveyors
+      double topConveyorVelocity = topConveyorEncoder.getVelocity();
+      double bottomConveyorVelocity = bottomConveyorEncoder.getVelocity();
 
-    // Calculate the velocity errors
-    double topConveyorVelocityError = velocitySetpoint == 0 ? 0 : topConveyorVelocity - velocitySetpoint;
-    double bottomConveyorVelocityError = velocitySetpoint == 0 ? 0 : bottomConveyorVelocity - velocitySetpoint;
+      // Calculate the velocity errors
+      double topConveyorVelocityError = velocitySetpoint == 0 ? 0 : topConveyorVelocity - velocitySetpoint;
+      double bottomConveyorVelocityError = velocitySetpoint == 0 ? 0 : bottomConveyorVelocity - velocitySetpoint;
 
-    // Dashboard data tracking
-    DataTracker.putNumber(getName(), "VelocitySetPoint", velocitySetpoint, true);
-    DataTracker.putNumber(getName(), "TopVelocity", topConveyorVelocity, true);
-    DataTracker.putNumber(getName(), "TopVelocityError", topConveyorVelocityError, true);
-    DataTracker.putNumber(getName(), "BottomVelocity", bottomConveyorVelocity, true);
-    DataTracker.putNumber(getName(), "BottomVelocityError", bottomConveyorVelocityError, true);
-    DataTracker.putBoolean(getName(), "IsGamePieceAmpReady", isGamePieceAmpReady(), true);
+      DataTracker.putNumber(getName(), "VelocitySetPoint", velocitySetpoint, true);
+      DataTracker.putNumber(getName(), "TopVelocity", topConveyorVelocity, true);
+      DataTracker.putNumber(getName(), "TopVelocityError", topConveyorVelocityError, true);
+      DataTracker.putNumber(getName(), "BottomVelocity", bottomConveyorVelocity, true);
+      DataTracker.putNumber(getName(), "BottomVelocityError", bottomConveyorVelocityError, true);
+      DataTracker.putBoolean(getName(), "IsGamePieceAmpReady", isGamePieceAmpReady(), true);
 
-    if (!DriverStation.isFMSAttached() && Constants.PID_TUNE_MODE) {
+      if (Constants.PID_TUNE_MODE) {
+        // PID updates from dashboard
+        updateTopConveyorPID = SmartDashboard.getBoolean("UpdateTopMotorPID", false);
+        updateBottomConveyorPID = SmartDashboard.getBoolean("UpdateBottomMotorPID", false);
 
-      // PID updates from dashboard
-      updateTopConveyorPID = SmartDashboard.getBoolean("UpdateTopMotorPID", false);
-      updateBottomConveyorPID = SmartDashboard.getBoolean("UpdateBottomMotorPID", false);
+        if (topConveyorPidParameters.updateParametersFromDashboard() && updateTopConveyorPID) {
+          updateTopConveyorPID = false;
+          topConveyorPidParameters.applyParameters(topConveyorPID);
+        }
 
-      if (topConveyorPidParameters.updateParametersFromDashboard() && updateTopConveyorPID) {
-        updateTopConveyorPID = false;
-        topConveyorPidParameters.applyParameters(topConveyorPID);
-      }
-
-      if (bottomConveyorPidParameters.updateParametersFromDashboard() && updateBottomConveyorPID) {
-        updateBottomConveyorPID = false;
-        bottomConveyorPidParameters.applyParameters(bottomConveyorPID);
+        if (bottomConveyorPidParameters.updateParametersFromDashboard() && updateBottomConveyorPID) {
+          updateBottomConveyorPID = false;
+          bottomConveyorPidParameters.applyParameters(bottomConveyorPID);
+        }
       }
     }
   }
@@ -135,12 +140,12 @@ public class ConveyorSubsystem extends SubsystemBase {
     bottomConveyor.stopMotor();
   }
 
-  public void runConveyorForwardAmp(){
+  public void runConveyorForwardAmp() {
     setConveyorVelocity(1000);
   }
 
   public boolean isGamePieceAmpReady() {
-    return !ampGamePieceReady.get();
+    return !ampBeamBreak.get();
   }
 
   private void setConveyorVelocity(double velocity) {

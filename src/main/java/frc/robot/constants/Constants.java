@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.robot.constants;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -27,7 +27,7 @@ public final class Constants {
     public static final int SYSID_CONTROLLER_PORT = 2;
 
     public static final double DEAD_BAND = 0.15;
-    public static final double EXPONENTIAL_RESPONSE = 2;
+    public static final double EXPONENTIAL_RESPONSE = 3;
   }
 
   public static class CanbusId {
@@ -46,44 +46,37 @@ public final class Constants {
     public static final int CONVEYOR_TOP = 14;
     public static final int CONVEYOR_BOTTOM = 15;
 
-    public static final int WINCH_LEFT = 16;
-    public static final int WINCH_RIGHT = 17;
-
     public static final int ELEVATOR = 18;
-    public static final int CLIMB_WHEELS = 19;
   }
 
   public static class DIOId {
-    public static final int INTAKE_PROXIMITY_SENSOR = 0;
-    public static final int SHOOTER_PROXIMITY_SENSOR = 1;
-    public static final int CONVEYOR_PROXIMITY_SENSOR = 2;
+    public static final int INTAKE_BEAM_BREAK = 0;
+    public static final int SHOOTER_BEAM_BREAK = 1;
+    public static final int CONVEYOR_BEAM_BREAK = 2;
   }
 
-  // JOHN LOOK HERE //Hi Krystian!!! Hi guys!! - Liam <3
   public static class MotorSetpoint {
-    // make 5000
     public static final int INTAKE_VELOCITY = 5000;
-    public static final int CONVEYOR_VELOCITY = 2000;
+    public static final int CONVEYOR_VELOCITY = 6784;
 
     public static final int SHOOTER_MARGIN_OF_ERROR = 5;
-    public static final int SHOOTER_DIVERT_VELOCITY = 1500;
+    public static final int SHOOTER_DIVERT_VELOCITY = 6784;
+    public static final int SHOOTER_HALF_VELOCITY = 1500;
     public static final int SHOOTER_VELOCITY = 3000;
 
     public static final int ELEVATOR_MARGIN_OF_ERROR = 2;
     public static final int ELEVATOR_DRIVE_POSITION = 0;
-    public static final int ELEVATOR_AMP_POSITION = 70; // 220 60:1
+    public static final int ELEVATOR_AMP_POSITION = 70;
     public static final int ELEVATOR_TRAP_POSITION = 100;
 
     // Value is between 0 and 1. 0.1 = 10% output
     public static final double ELEVAOTOR_MAX_OUPUT = 1.0;
-
-
-    // Value is between 0 and 1. 0.1 = 10% output
-    public static final double WINCH_MAX_OUPUT = 0.1;
   }
 
-  public static class LEDConstants {
-    // I2C Addresses for the Arduino controllers
-    public static final int ARDUINO_ADDRESS = 0x01;
+  public static class SubsystemEnable {
+    public static final boolean INTAKE = true;
+    public static final boolean SHOOTER = true;
+    public static final boolean CONVEYOR = true;
+    public static final boolean ELEVATOR = true;
   }
 }

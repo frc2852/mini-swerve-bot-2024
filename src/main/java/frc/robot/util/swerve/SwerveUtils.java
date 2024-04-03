@@ -1,6 +1,6 @@
 package frc.robot.util.swerve;
 
-import frc.robot.Constants.OperatorConstant;
+import frc.robot.constants.Constants.OperatorConstant;
 
 public class SwerveUtils {
 

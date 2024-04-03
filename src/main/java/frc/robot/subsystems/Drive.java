@@ -6,8 +6,6 @@ package frc.robot.subsystems;
 
 import java.util.Optional;
 
-import org.photonvision.EstimatedRobotPose;
-
 import com.kauailabs.navx.frc.AHRS;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
@@ -20,24 +18,24 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CanbusId;
-import frc.robot.util.constants.SwerveConstants.SwerveDrive;
-import frc.robot.util.constants.SwerveConstants.SwerveModule;
+import frc.robot.constants.Constants.CanbusId;
+import frc.robot.constants.SwerveConstants.SwerveDrive;
+import frc.robot.constants.SwerveConstants.SwerveModule;
+import frc.robot.subsystems.vision.GamePieceDetection;
 import frc.robot.util.swerve.MAXSwerveModule;
 import frc.robot.util.swerve.SwerveUtils;
+import frc.robot.util.vision.TargetInfo;
 
-public class DriveSubsystem extends SubsystemBase {
+public class Drive extends SubsystemBase {
 
   // Create MAXSwerveModules
   private final MAXSwerveModule frontLeft = new MAXSwerveModule(
@@ -60,8 +58,8 @@ public class DriveSubsystem extends SubsystemBase {
       CanbusId.REAR_RIGHT_TURNING,
       SwerveDrive.BACK_RIGHT_CHASSIS_ANGULAR_OFFSET);
 
-  // The gyro sensor
-  private final AHRS navX = new AHRS(SerialPort.Port.kUSB);
+  // Sensors
+  private final AHRS navX = new AHRS(SerialPort.Port.kMXP);
 
   // Slew rate filter variables for controlling lateral acceleration
   private double currentRotation = 0.0;
@@ -72,18 +70,8 @@ public class DriveSubsystem extends SubsystemBase {
   private SlewRateLimiter rotLimiter = new SlewRateLimiter(SwerveDrive.ROTATIONAL_SLEW_RATE);
   private double prevTime = WPIUtilJNI.now() * 1e-6;
 
-  // Odometry class for tracking robot pose
-  SwerveDriveOdometry odometry = new SwerveDriveOdometry(
-      SwerveDrive.DRIVE_KINEMATICS,
-      getRotation(),
-      new SwerveModulePosition[] {
-          frontLeft.getPosition(),
-          frontRight.getPosition(),
-          rearLeft.getPosition(),
-          rearRight.getPosition()
-      });
-
-  private SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(
+  // Odometry for tracking robot pose
+  SwerveDrivePoseEstimator poseEstimator = new SwerveDrivePoseEstimator(
       SwerveDrive.DRIVE_KINEMATICS,
       getRotation(),
       new SwerveModulePosition[] {
@@ -92,32 +80,47 @@ public class DriveSubsystem extends SubsystemBase {
           rearLeft.getPosition(),
           rearRight.getPosition()
       },
-      new Pose2d(2, 6, new Rotation2d(90)) // initial pose; adjust as needed
+      new Pose2d(0, 0, new Rotation2d(0)) // 0 or 180
   );
 
+  // Smartdashboard
   private final Field2d field = new Field2d();
 
-  /** Creates a new DriveSubsystem. */
-  public DriveSubsystem() {
-    zeroHeading();
+  // Subsystems
+  private final GamePieceDetection gamePieceDetection;
 
-    SmartDashboard.putData(field);
+  public Drive(GamePieceDetection gamePieceDetection) {
+
+    // Reset the gyro for field orientation
+    zeroHeading();
 
     // Configure AutoBuilder last
     AutoBuilder.configureHolonomic(
         this::getPose, // Robot pose supplier
-        this::resetPoseEstimator, // resetOdometry??? // Method to reset odometry (will be called if your auto has a starting pose)
+        this::resetPoseEstimator, // Method to reset odometry (will be called if your auto has a starting pose)
         this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
         this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
         new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-            new PIDConstants(5.0, SwerveModule.DRIVING_I, SwerveModule.DRIVING_D), // Translation PID constants
-            new PIDConstants(5.0, SwerveModule.TURNING_I, SwerveModule.TURNING_D), // Rotation PID constants
-            SwerveDrive.MAX_SPEED_METERS_PER_SECOND, // Max module speed, in m/s
-            0.4, // Drive base radius in meters. Distance from robot center to furthest module.
-            new ReplanningConfig() // Default path replanning config. See the API for the options here
-        ),
+
+            // Translation PID constants
+            // TODO: P = 2
+            new PIDConstants(2, SwerveModule.DRIVING_I, SwerveModule.DRIVING_D),
+
+            // Rotation PID constants
+            // TODO: P = 1
+            new PIDConstants(2, SwerveModule.TURNING_I, SwerveModule.TURNING_D),
+
+            // Max module speed, in m/s
+            SwerveDrive.MAX_SPEED_METERS_PER_SECOND,
+
+            // Drive base radius in meters. Distance from robot center to furthest module.
+            // Radius in meters of 29.5 x 29.5 inch robot using a^2 +b^2 = c^2
+            Math.sqrt(Math.pow(SwerveDrive.TRACK_WIDTH, 2) + Math.pow(SwerveDrive.WHEEL_BASE, 2)) / 2,
+
+            // Default path replanning config. See the API for the options here
+            new ReplanningConfig()),
         () -> {
-          // Boolean supplier that controls when the path will be mirrored for the red alliance
+          // Boolean supplier that controls when the path will be mirrored for the red alliances
           // This will flip the path being followed to the red side of the field.
           // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
           Optional<Alliance> alliance = DriverStation.getAlliance();
@@ -128,20 +131,17 @@ public class DriveSubsystem extends SubsystemBase {
         },
         this // Reference to this subsystem to set requirements
     );
+
+    // Subsystems
+    this.gamePieceDetection = gamePieceDetection;
+
+    // Smartdashboard
+    SmartDashboard.putData(field);
   }
 
   @Override
   public void periodic() {
     // Update the odometry in the periodic block
-    odometry.update(
-        getRotation(),
-        new SwerveModulePosition[] {
-            frontLeft.getPosition(),
-            frontRight.getPosition(),
-            rearLeft.getPosition(),
-            rearRight.getPosition()
-        });
-
     poseEstimator.update(
         getRotation(),
         new SwerveModulePosition[] {
@@ -161,26 +161,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
-    // TODO: Should this be odometry or poseEstimator?
-    // return odometry.getPoseMeters();
     return poseEstimator.getEstimatedPosition();
-  }
-
-  /**
-   * Resets the odometry to the specified pose.
-   *
-   * @param pose The pose to which to set the odometry.
-   */
-  public void resetOdometry(Pose2d pose) {
-    odometry.resetPosition(
-        getRotation(),
-        new SwerveModulePosition[] {
-            frontLeft.getPosition(),
-            frontRight.getPosition(),
-            rearLeft.getPosition(),
-            rearRight.getPosition()
-        },
-        pose);
   }
 
   /**
@@ -364,4 +345,35 @@ public class DriveSubsystem extends SubsystemBase {
     // Set the desired state for each swerve module
     setModuleStates(moduleStates);
   }
+
+  // #region Note alignment
+
+  /**
+   * Aligns the robot with the note and drives to pick it up.
+   */
+  public void alignAndPickUpNote() {
+    TargetInfo targetInfo = gamePieceDetection.getTargetInfo();
+    if (targetInfo == null) {
+      // No target detected, stop the robot
+      drive(0, 0, 0, false, false);
+      return;
+    }
+
+    double targetAngle = targetInfo.getAngle();
+    double targetDistance = targetInfo.getDistance();
+
+    // Calculate the desired robot heading and position to align with and approach the note
+    double desiredHeading = getHeadingDegrees() + targetAngle;
+    double deltaX = targetDistance * Math.cos(Math.toRadians(desiredHeading));
+    double deltaY = targetDistance * Math.sin(Math.toRadians(desiredHeading));
+
+    // Convert desired position and heading to field-relative speeds
+    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+        deltaX, deltaY, 0, getRotation());
+
+    // Drive the robot towards the calculated position and orientation
+    driveRobotRelative(speeds);
+  }
+
+  // #endregion
 }

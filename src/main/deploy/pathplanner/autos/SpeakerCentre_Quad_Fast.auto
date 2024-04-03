@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.38,
-      "y": 4.56
+      "x": 1.4,
+      "y": 5.49
     },
     "rotation": 180.0
   },
@@ -12,9 +12,21 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "SpeakerShot"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "SourceSideHack"
+            "pathName": "SpeakerCentre_Note2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note2_SpeakerCentre"
           }
         },
         {
@@ -26,13 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerSourceSide_Note3"
+            "pathName": "SpeakerCentre_Note3_Tight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Note3_SpeakerSourceSide"
+            "pathName": "Note3_SpeakerCentre_Tight"
           }
         },
         {
@@ -44,19 +56,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerSourceSide_CentreNote5"
+            "pathName": "SpeakerCentre_Note1_Tight"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Note5_SpeakerSourceSide"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SpeakerShot"
+            "pathName": "Note1_SpeakerCentre_Tight"
           }
         }
       ]

@@ -8,7 +8,6 @@ import com.revrobotics.SparkMaxAlternateEncoder;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import frc.robot.util.constants.LogConstants;
 
 import java.util.function.Supplier;
 
@@ -26,37 +25,23 @@ public class SparkMax extends CANSparkMax {
   private static final double MAX_RETRY_DELAY = 2.0; // Maximum delay in seconds
   private static final double BACKOFF_MULTIPLIER = 2.0; // Multiplier for each retry
 
-  private boolean initialized = false;
-  private boolean deviceConnectionStatus = false;
-
   public SparkMax(int canBusId, MotorModel motorType) {
     super(canBusId, (motorType == MotorModel.NEO || motorType == MotorModel.NEO_550) ? MotorType.kBrushless : MotorType.kBrushed);
+    // Restore factory defaults
+    restoreFactoryDefaults();
 
-    // Check if the device is connected
-    if (isDeviceConnected()) {
+    // Enable voltage compensation to 12V
+    enableVoltageCompensation(12.0);
 
-      // Restore factory defaults
-      restoreFactoryDefaults();
-
-      // Enable voltage compensation to 12V
-      enableVoltageCompensation(12.0);
-
-      // For NEO_550 motors, enable Smart Current Limit to 20 amps
-      // This can be overridden by the caller if needed
-      if (motorType == MotorModel.NEO_550) {
-        setSmartCurrentLimit(20);
-      }
-    } else {
-      String errorMessage = String.format("CANSparkFlex (%s): Device not connected, skipping", canBusId);
-      DataTracker.putString(LogConstants.ROBOT_SYSTEM, "SparkFlex", errorMessage, false);
-      DriverStation.reportError(errorMessage, false);
+    // For NEO_550 motors, enable Smart Current Limit to 20 amps
+    // This can be overridden by the caller if needed
+    if (motorType == MotorModel.NEO_550) {
+      setSmartCurrentLimit(20);
     }
+
   }
 
   // #region CANSparkLowLevel overrides
-
-  /// Note: The following methods are overrides of the CANSparkLowLevel methods.
-  /// Should likely add all of them, but only adding the ones we need for now.
 
   @Override
   public REVLibError restoreFactoryDefaults() {
@@ -190,14 +175,6 @@ public class SparkMax extends CANSparkMax {
    *         an error is logged.
    */
   private REVLibError applyCommandWithRetry(Supplier<REVLibError> command, String methodName) {
-    // Check if the device is connected before proceeding
-    if (!isDeviceConnected()) {
-      String errorMessage = String.format("CANSparkFlex (%s): Device not connected, skipping %s", this.getDeviceId(), methodName);
-      DataTracker.putString(LogConstants.ROBOT_SYSTEM, "SparkFlex", errorMessage, false);
-      DriverStation.reportError(errorMessage, false);
-      return REVLibError.kCANDisconnected;
-    }
-
     REVLibError status = REVLibError.kUnknown;
     double currentDelay = INITIAL_RETRY_DELAY;
 
@@ -235,14 +212,6 @@ public class SparkMax extends CANSparkMax {
    *         an error is logged.
    */
   private <T> T applyCommandWithRetryAndNullCheck(Supplier<T> command, String methodName) {
-    // Check if the device is connected before proceeding
-    if (!isDeviceConnected()) {
-      String errorMessage = String.format("CANSparkMax (%s): Device not connected, skipping %s", this.getDeviceId(), methodName);
-      DataTracker.putString(LogConstants.ROBOT_SYSTEM, "SparkMax", errorMessage, false);
-      DriverStation.reportError(errorMessage, false);
-      return null;
-    }
-
     T result = null;
     double currentDelay = INITIAL_RETRY_DELAY;
 
@@ -264,27 +233,5 @@ public class SparkMax extends CANSparkMax {
     String error = String.format("CANSparkMax (%s): %s returned null after %d attempts", this.getDeviceId(), methodName, MAX_RETRIES);
     DriverStation.reportError(error, false);
     return result;
-  }
-
-  /**
-   * Checks if the CANSparkMax device is currently connected to the CAN bus.
-   * 
-   * This method attempts to retrieve the firmware version of the connected CANSparkMax device.
-   * If the firmware version can be successfully retrieved and is not empty, it is assumed that
-   * the device is connected. Otherwise, it is assumed that the device is not connected to the CAN bus.
-   *
-   * @return true if the device is connected (firmware version is retrievable and not empty),
-   *         false otherwise.
-   */
-  private boolean isDeviceConnected() {
-    if (!initialized) {
-      // Attempt to get the firmware version
-      String firmwareVersion = getFirmwareString();
-
-      // Check if firmwareVersion is not null and not empty
-      deviceConnectionStatus = firmwareVersion != null && !firmwareVersion.isEmpty() && !firmwareVersion.equalsIgnoreCase("v0.0.0");
-      initialized = true;
-    }
-    return deviceConnectionStatus;
   }
 }

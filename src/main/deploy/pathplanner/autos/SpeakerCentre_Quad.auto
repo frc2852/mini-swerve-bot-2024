@@ -56,7 +56,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerCentre_CentreNote2"
+            "pathName": "SpeakerCentre_Note1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Note1_SpeakerCentre"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SpeakerShot"
           }
         }
       ]

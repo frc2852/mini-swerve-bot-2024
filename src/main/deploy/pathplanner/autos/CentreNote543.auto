@@ -2,43 +2,61 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.72,
-      "y": 6.72
+      "x": 0.53,
+      "y": 2.1
     },
-    "rotation": -120.0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "SpeakerShot"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "SpeakerAmpSide_Note1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Note1_SpeakerAmpSide"
+            "pathName": "SourceCorner_Centre"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "SpeakerShot"
+            "name": "Discharge"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerAmpSide_CentreNote1"
+            "pathName": "Centre5_Centre4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Centre4Shot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Discharge"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Centre4_Centre3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Centre3Shot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SpeakerShot"
           }
         }
       ]

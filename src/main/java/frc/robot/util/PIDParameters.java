@@ -8,7 +8,7 @@ import com.revrobotics.SparkPIDController;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
+import frc.robot.constants.Constants;
 
 public class PIDParameters {
 
@@ -164,8 +164,6 @@ public class PIDParameters {
     DataTracker.putNumber(groupId, namePrefix + "D", D, true);
     DataTracker.putNumber(groupId, namePrefix + "Iz", Iz, true);
     DataTracker.putNumber(groupId, namePrefix + "FF", FF, true);
-    // DataTracker.putNumber(groupId, namePrefix + "MinOutput", MinOutput, true);
-    // DataTracker.putNumber(groupId, namePrefix + "MaxOutput", MaxOutput, true);
   }
 
   private double getNumber(String groupId, String key, double defaultValue) {

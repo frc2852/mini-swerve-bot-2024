@@ -9,18 +9,18 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.subsystems.ConveyorSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
 public class SpeakerShot extends SequentialCommandGroup {
-  public SpeakerShot(IntakeSubsystem intakeSubsystem, ConveyorSubsystem conveyorSubsystem, ShooterSubsystem shooterSubsystem) {
+  public SpeakerShot(Intake intakeSubsystem, Conveyor conveyorSubsystem, Shooter shooterSubsystem) {
     addCommands(
         new InstantCommand(() -> shooterSubsystem.resetState(), shooterSubsystem),
         // Get shooter rollers up to speed
         new RunCommand(() -> shooterSubsystem.flyWheelFullSpeed(), shooterSubsystem)
             .until(() -> shooterSubsystem.isShooterAtSpeed()),
-        // new WaitCommand(0.2),
+        new WaitCommand(0.2),
         // Run intake, conveyor, shooter in parallel until the game piece is ready
         new ParallelCommandGroup(
             new RunCommand(() -> shooterSubsystem.flyWheelFullSpeed(), shooterSubsystem),

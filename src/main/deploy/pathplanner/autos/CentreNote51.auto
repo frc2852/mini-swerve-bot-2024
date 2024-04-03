@@ -12,15 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "SpeakerSourceSideHack"
+            "pathName": "SourceCorner_Centre"
           }
         },
         {
@@ -32,7 +26,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SpeakerSourceSide_CentreNote5"
+            "pathName": "CentreNote5_CentreNote1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SpeakerShot"
           }
         }
       ]
