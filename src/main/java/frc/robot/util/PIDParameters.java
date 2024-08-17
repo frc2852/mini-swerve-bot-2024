@@ -92,8 +92,6 @@ public class PIDParameters {
     this.FF = FF;
     this.MinOutput = MinOutput;
     this.MaxOutput = MaxOutput;
-
-    displayParameters();
   }
 
   public boolean updateParametersFromDashboard() {
@@ -153,17 +151,6 @@ public class PIDParameters {
     pidController.setFF(FF);
     pidController.setOutputRange(MinOutput, MaxOutput);
     pendingPIDUpdate = false;
-  }
-
-  private void displayParameters() {
-    if (DriverStation.isFMSAttached() || !Constants.PID_TUNE_MODE)
-      return;
-
-    DataTracker.putNumber(groupId, namePrefix + "P", P, true);
-    DataTracker.putNumber(groupId, namePrefix + "I", I, true);
-    DataTracker.putNumber(groupId, namePrefix + "D", D, true);
-    DataTracker.putNumber(groupId, namePrefix + "Iz", Iz, true);
-    DataTracker.putNumber(groupId, namePrefix + "FF", FF, true);
   }
 
   private double getNumber(String groupId, String key, double defaultValue) {

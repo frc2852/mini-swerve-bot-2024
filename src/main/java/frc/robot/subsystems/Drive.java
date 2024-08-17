@@ -30,10 +30,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.Constants.CanbusId;
 import frc.robot.constants.SwerveConstants.SwerveDrive;
 import frc.robot.constants.SwerveConstants.SwerveModule;
-import frc.robot.subsystems.vision.GamePieceDetection;
 import frc.robot.util.swerve.MAXSwerveModule;
 import frc.robot.util.swerve.SwerveUtils;
-import frc.robot.util.vision.TargetInfo;
 
 public class Drive extends SubsystemBase {
 
@@ -87,9 +85,7 @@ public class Drive extends SubsystemBase {
   private final Field2d field = new Field2d();
 
   // Subsystems
-  private final GamePieceDetection gamePieceDetection;
-
-  public Drive(GamePieceDetection gamePieceDetection) {
+  public Drive() {
 
     // Reset the gyro for field orientation
     zeroHeading();
@@ -131,9 +127,6 @@ public class Drive extends SubsystemBase {
         },
         this // Reference to this subsystem to set requirements
     );
-
-    // Subsystems
-    this.gamePieceDetection = gamePieceDetection;
 
     // Smartdashboard
     SmartDashboard.putData(field);
@@ -345,35 +338,4 @@ public class Drive extends SubsystemBase {
     // Set the desired state for each swerve module
     setModuleStates(moduleStates);
   }
-
-  // #region Note alignment
-
-  /**
-   * Aligns the robot with the note and drives to pick it up.
-   */
-  public void alignAndPickUpNote() {
-    TargetInfo targetInfo = gamePieceDetection.getTargetInfo();
-    if (targetInfo == null) {
-      // No target detected, stop the robot
-      drive(0, 0, 0, false, false);
-      return;
-    }
-
-    double targetAngle = targetInfo.getAngle();
-    double targetDistance = targetInfo.getDistance();
-
-    // Calculate the desired robot heading and position to align with and approach the note
-    double desiredHeading = getHeadingDegrees() + targetAngle;
-    double deltaX = targetDistance * Math.cos(Math.toRadians(desiredHeading));
-    double deltaY = targetDistance * Math.sin(Math.toRadians(desiredHeading));
-
-    // Convert desired position and heading to field-relative speeds
-    ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-        deltaX, deltaY, 0, getRotation());
-
-    // Drive the robot towards the calculated position and orientation
-    driveRobotRelative(speeds);
-  }
-
-  // #endregion
 }

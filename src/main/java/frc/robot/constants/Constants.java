@@ -23,63 +23,17 @@ public final class Constants {
 
   public static class OperatorConstant {
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    public static final int OPERATOR_CONTROLLER_PORT = 1;
-    public static final int SYSID_CONTROLLER_PORT = 2;
-
     public static final double DEAD_BAND = 0.15;
     public static final double EXPONENTIAL_RESPONSE = 3;
   }
 
   public static class CanbusId {
     public static final int POWER_DISTRIBUTION_HUB = 1;
-    public static final int FRONT_LEFT_DRIVE = 2, FRONT_LEFT_TURNING = 3;
-    public static final int FRONT_RIGHT_DRIVE = 4, FRONT_RIGHT_TURNING = 5;
-    public static final int REAR_LEFT_DRIVE = 6, REAR_LEFT_TURNING = 7;
-    public static final int REAR_RIGHT_DRIVE = 8, REAR_RIGHT_TURNING = 9;
 
-    public static final int INTAKE_TOP_ROLLER = 10;
-    public static final int INTAKE_BOTTOM_ROLLER = 11;
+    public static final int FRONT_LEFT_DRIVE = 7, FRONT_LEFT_TURNING = 8;
+    public static final int FRONT_RIGHT_DRIVE = 6, FRONT_RIGHT_TURNING = 5;
 
-    public static final int SHOOTER_TOP_ROLLER = 12;
-    public static final int SHOOTER_BOTTOM_ROLLER = 13;
-
-    public static final int CONVEYOR_TOP = 14;
-    public static final int CONVEYOR_BOTTOM = 15;
-
-    public static final int ELEVATOR = 18;
-  }
-
-  public static class DIOId {
-    public static final int INTAKE_BEAM_BREAK = 0;
-    public static final int SHOOTER_BEAM_BREAK = 1;
-    public static final int CONVEYOR_BEAM_BREAK = 2;
-  }
-
-  public static class MotorSetpoint {
-    public static final int INTAKE_VELOCITY = 5000;
-    public static final int CONVEYOR_VELOCITY = 6784;
-
-    public static final int SHOOTER_MARGIN_OF_ERROR = 5;
-    public static final int SHOOTER_DIVERT_VELOCITY = 6784;
-    public static final int SHOOTER_HALF_VELOCITY = 1500;
-    public static final int SHOOTER_VELOCITY = 3000;
-
-    public static final int ELEVATOR_MARGIN_OF_ERROR = 2;
-    public static final int ELEVATOR_DRIVE_POSITION = 0;
-    public static final int ELEVATOR_AMP_POSITION = 70;
-
-    
-    public static final int ELEVATOR_CLIMB_DOWN_POSITION = 0;
-    public static final int ELEVATOR_CLIMB_UP_POSITION = 70;
-
-    // Value is between 0 and 1. 0.1 = 10% output
-    public static final double ELEVAOTOR_MAX_OUPUT = 1.0;
-  }
-
-  public static class SubsystemEnable {
-    public static final boolean INTAKE = true;
-    public static final boolean SHOOTER = true;
-    public static final boolean CONVEYOR = true;
-    public static final boolean ELEVATOR = true;
+    public static final int REAR_LEFT_DRIVE = 1, REAR_LEFT_TURNING = 2;
+    public static final int REAR_RIGHT_DRIVE = 4, REAR_RIGHT_TURNING = 3;
   }
 }
