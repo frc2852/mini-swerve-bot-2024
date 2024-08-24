@@ -39,22 +39,30 @@ public class Drive extends SubsystemBase {
   private final MAXSwerveModule frontLeft = new MAXSwerveModule(
       CanbusId.FRONT_LEFT_DRIVE,
       CanbusId.FRONT_LEFT_TURNING,
-      SwerveDrive.FRONT_LEFT_CHASSSIS_ANGULAR_OFFSET);
+      SwerveDrive.FRONT_LEFT_CHASSSIS_ANGULAR_OFFSET,
+      false,
+      false);
 
   private final MAXSwerveModule frontRight = new MAXSwerveModule(
       CanbusId.FRONT_RIGHT_DRIVE,
       CanbusId.FRONT_RIGHT_TURNING,
-      SwerveDrive.FRONT_RIGHT_CHASSIS_ANGULAR_OFFSET);
+      SwerveDrive.FRONT_RIGHT_CHASSIS_ANGULAR_OFFSET,
+      false,
+      false);
 
   private final MAXSwerveModule rearLeft = new MAXSwerveModule(
       CanbusId.REAR_LEFT_DRIVE,
       CanbusId.REAR_LEFT_TURNING,
-      SwerveDrive.BACK_LEFT_CHASSIS_ANGULAR_OFFSET);
+      SwerveDrive.BACK_LEFT_CHASSIS_ANGULAR_OFFSET,
+      false,
+      false);
 
   private final MAXSwerveModule rearRight = new MAXSwerveModule(
       CanbusId.REAR_RIGHT_DRIVE,
       CanbusId.REAR_RIGHT_TURNING,
-      SwerveDrive.BACK_RIGHT_CHASSIS_ANGULAR_OFFSET);
+      SwerveDrive.BACK_RIGHT_CHASSIS_ANGULAR_OFFSET,
+      false,
+      false);
 
   // Sensors
   private final AHRS navX = new AHRS(SerialPort.Port.kMXP);
@@ -84,7 +92,7 @@ public class Drive extends SubsystemBase {
   // Smartdashboard
   private final Field2d field = new Field2d();
 
-  // Subsystems
+  
   public Drive() {
 
     // Reset the gyro for field orientation
@@ -186,6 +194,14 @@ public class Drive extends SubsystemBase {
 
     double xSpeedCommanded;
     double ySpeedCommanded;
+
+    SmartDashboard.putNumber("getPitch", navX.getPitch());
+    SmartDashboard.putNumber("getAngle", navX.getAngle());
+    SmartDashboard.putNumber("getRate", navX.getRate());
+    SmartDashboard.putNumber("getCompassHeading", navX.getCompassHeading());
+    SmartDashboard.putNumber("getRawGyroX", navX.getRawGyroX());
+    SmartDashboard.putNumber("getRawGyroY", navX.getRawGyroY());
+    SmartDashboard.putNumber("getRawGyroZ", navX.getRawGyroZ());
 
     if (rateLimit) {
       // Convert XY to polar for rate limiting
@@ -296,7 +312,7 @@ public class Drive extends SubsystemBase {
       return 0;
     }
   }
-
+  
   /**
    * Returns the turn rate of the robot.
    *

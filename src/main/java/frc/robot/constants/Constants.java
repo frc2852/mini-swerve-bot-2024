@@ -30,10 +30,10 @@ public final class Constants {
   public static class CanbusId {
     public static final int POWER_DISTRIBUTION_HUB = 1;
 
-    public static final int FRONT_LEFT_DRIVE = 7, FRONT_LEFT_TURNING = 8;
-    public static final int FRONT_RIGHT_DRIVE = 6, FRONT_RIGHT_TURNING = 5;
+    public static final int FRONT_LEFT_DRIVE = 6, FRONT_LEFT_TURNING = 5;
+    public static final int FRONT_RIGHT_DRIVE = 8, FRONT_RIGHT_TURNING = 7;
 
-    public static final int REAR_LEFT_DRIVE = 1, REAR_LEFT_TURNING = 2;
-    public static final int REAR_RIGHT_DRIVE = 4, REAR_RIGHT_TURNING = 3;
+    public static final int REAR_LEFT_DRIVE = 4, REAR_LEFT_TURNING = 3;
+    public static final int REAR_RIGHT_DRIVE = 1, REAR_RIGHT_TURNING = 2;
   }
 }
